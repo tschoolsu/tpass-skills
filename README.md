@@ -43,15 +43,26 @@ TSchool 數位服務團隊（T-Pass）的 Claude Code plugin：把「模型推�
 ## 手動跑檢查
 
 `scripts/check.sh` 是可執行的 grep 集合，涵蓋設計系統違規、SSO 紅線、硬編碼網域、npm/yarn 鎖檔。
-在服務 repo 根目錄執行：
+**給消費端服務跑**（`tpass-form`、`tpass-portal` 這類靠 `tpass-auth-js` 驗票的服務）；在
+`tpass-auth`（發證端）跑會誤報「手刻 jwtVerify/algorithms」——那份是 auth 本來就該有的簽章邏輯，
+不是抄漏的驗章。在服務 repo 根目錄執行：
 
 ```bash
-bash ~/.claude/plugins/*/tpass/scripts/check.sh
+bash ~/.claude/plugins/cache/tpass-skills/tpass/*/scripts/check.sh
 ```
 
-或安裝後在對話中請 Claude 跑 `${CLAUDE_PLUGIN_ROOT}/scripts/check.sh`（plugin 啟用時這個變數會被
-自動代換成安裝路徑）。有命中會印出「檔案:行」並 exit 1；全乾淨 exit 0。已知例外（`global-error.tsx`
-的 inline hex、`HeroSection.tsx` 的 Google logo 品牌色）已經寫進腳本，不會誤報。
+路徑格式固定為 `~/.claude/plugins/cache/<marketplace 名>/<plugin 名>/<version>/scripts/check.sh`
+（`claude plugin install` 會把 marketplace 版本複製進 cache，不是原地跑；2026-08-29 用
+`claude plugin marketplace add` + `claude plugin install tpass@tpass-skills` 實測過，安裝後
+`find ~/.claude/plugins -name check.sh` 命中的是這個 cache 路徑，不是舊文件猜的
+`~/.claude/plugins/*/tpass/scripts/check.sh`——那個猜測少了中間的 `cache/<marketplace>/` 兩層）。
+
+或安裝後在對話中請 Claude 跑 `${CLAUDE_PLUGIN_ROOT}/scripts/check.sh`——這個變數**會在 SKILL.md
+內文裡被代換**（官方文件 `skills.md` §Available string substitutions 明載：plugin skill 的
+`${CLAUDE_PLUGIN_ROOT}` 會在 skill 內文與 `allowed-tools` 的 Bash 規則裡代換，代換值就是上面那個
+cache 路徑），不需要人工拼路徑，這是首選寫法。有命中會印出「檔案:行」並 exit 1；全乾淨 exit 0。
+已知例外（`global-error.tsx` 的 inline hex、`HeroSection.tsx` 的 Google logo 品牌色）已經寫進腳本，
+不會誤報。
 
 ## 開發
 

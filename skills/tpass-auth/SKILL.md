@@ -36,7 +36,7 @@ pnpm add github:tschoolsu/tpass-auth-js#v1.1.1 jose   # 釘 tag，不要用 #mai
 寫在 action/handler 函式內部：
 
 ```ts
-if (!perm.read) redirect(`${process.env.AUTH_DENIED_URL}?service=${TPASS_SERVICE_ID}`);
+if (!perm.read) redirect(tpass.deniedUrl());
 ```
 
 ## 權限讀 permissions claim，groups 不存在

@@ -1,8 +1,10 @@
 # SSO 串接最小範例
 
-摘自 `tpass-portal`（消費端參考實作）。
+摘自 `tpass-portal`（消費端參考實作）。下面統一用 `config/auth.ts`（多數服務的命名慣例）；
+`tpass-portal` 自己的實際檔名是 `config/portal.ts`，import 路徑改成 `@/config/portal` 即可，
+其餘寫法一致。
 
-`src/config/portal.ts`（env 綁定）：
+`src/config/auth.ts`（env 綁定）：
 
 ```ts
 import "server-only";
@@ -25,7 +27,7 @@ export function deniedUrlFor(serviceId: string): string {
 `src/app/api/auth/callback/route.ts`：
 
 ```ts
-import { tpass } from "@/config/portal";
+import { tpass } from "@/config/auth";
 
 export const runtime = "nodejs";
 export const POST = tpass.callbackHandler;
@@ -34,7 +36,7 @@ export const POST = tpass.callbackHandler;
 `src/app/api/auth/logout/route.ts`：
 
 ```ts
-import { tpass } from "@/config/portal";
+import { tpass } from "@/config/auth";
 
 export const runtime = "nodejs";
 export const POST = tpass.logoutHandler;
