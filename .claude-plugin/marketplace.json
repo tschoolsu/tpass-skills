@@ -1,0 +1,14 @@
+{
+  "name": "tpass-skills",
+  "owner": {
+    "name": "TSchool 數位服務團隊"
+  },
+  "description": "T-Pass 數位部規則 marketplace：design system、SSO 串接、服務慣例 plugin",
+  "plugins": [
+    {
+      "name": "tpass",
+      "source": "./",
+      "description": "T-Pass 數位部規則：design system、SSO 串接、服務慣例，含可執行檢查腳本"
+    }
+  ]
+}

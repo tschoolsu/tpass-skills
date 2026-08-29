@@ -1,0 +1,12 @@
+{
+  "name": "tpass",
+  "displayName": "T-Pass 數位部規則",
+  "description": "TSchool 數位服務團隊（T-Pass）AI agent 規則：design system、SSO 串接、服務慣例，含可執行檢查腳本",
+  "version": "1.0.0",
+  "author": {
+    "name": "TSchool 數位服務團隊"
+  },
+  "repository": "https://github.com/tschoolsu/tpass-skills",
+  "license": "MIT",
+  "keywords": ["tpass", "sso", "design-system", "neobrutalism", "next.js"]
+}
