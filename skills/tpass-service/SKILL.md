@@ -11,6 +11,8 @@ description: T-Pass 服務慣例：新服務、註冊表 services.json、env 設
 
 `icon` 必須是 lucide-react 的 PascalCase 名，且必須已在 `tpass-portal/src/config/icons.ts` 白名單裡——registry 的 `validate.mjs` 只驗格式（PascalCase），**不驗是否在白名單**，白名單外的名字要等 portal 部署時才會炸（真實事故：2026-08-26 `CalendarDays` 不在白名單）。清單外的圖示要在 PR 說明裡提一句，讓維運同步加進 `icons.ts`。
 
+`portal.category` 必填，值只能是 `governance`（治理正式流程——開會/選舉/查法規）、`service`（日常功能性工具）、`event`（限定活動臨時服務），大廳依它分三段顯示。判斷依據是「這個工具的性質」，不是「誰在用」——大部分服務前台對全體開放、後台限幹部，猜受眾會猜錯（2026-09-01 曾把 `roles: student/teacher/all` 那套受眾分類全部拔掉換成這個，因為填了快一年全部只填 `all`，從沒真的區分過）。
+
 ## 網域 / issuer / URL 全 env 驅動
 
 不寫死網域，包含「感覺不像 code」的地方（行銷文案、footer、meta 標籤）——`tpass-portal/HeroSection.tsx` 曾經寫死 `tschool.edu.tw` 就是真實漏網案例。服務自己的必填 env 用這個模式（SSO 那六顆 env 由 `tpass-auth-js` 自己檢查，不用重複寫）：
