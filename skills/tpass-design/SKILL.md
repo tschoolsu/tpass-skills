@@ -10,7 +10,7 @@ description: T-Pass Neobrutalism 設計系統規則。寫元件/UI/樣式/顏色
 ## 元件一律 import 自 tpass-ui，不要手刻 primitives
 
 ```bash
-pnpm add github:tschoolsu/tpass-ui#v1.0.0
+pnpm add github:tschoolsu/tpass-ui#v1.0.1
 ```
 
 ```ts
